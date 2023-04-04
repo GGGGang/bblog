@@ -12,12 +12,12 @@ export default {
   },
   data() {
     return {
-      activeIndex: "/",
+      activeIndex: "/HomePageContent",
       tabs: [
         {
           label: "推荐",
           name: "homePage",
-          index: "/",
+          index: "/HomePageContent",
         },
         {
           label: "最新",

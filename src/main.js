@@ -2,12 +2,15 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import api from "./utils/api";
 
 import ElementPlus from "element-plus";
 import * as ElIconModules from "@element-plus/icons-vue";
 import "element-plus/dist/index.css";
 
 const app = createApp(App);
+
+app.config.globalProperties.$https = api;
 
 // 注册全局组件
 Object.keys(ElIconModules).forEach((key) => {
