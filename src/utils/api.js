@@ -1,6 +1,7 @@
 import axios from "axios";
-
-let base = "";
+// 前端跨域携带cookic
+axios.defaults.withCredentials = true;
+let base = "http://localhost:8081";
 export default {
   postRequest,
   uploadFileRequest,

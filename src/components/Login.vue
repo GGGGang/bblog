@@ -30,36 +30,36 @@ export default {
   },
   methods: {
     submitClick: function () {
-      this.$router.replace({ path: "/HomePage" });
       // var _this = this;
-      // this.loading = true;
-
-      // this.$https
-      //   .postRequest("/login", {
-      //     username: this.loginForm.username,
-      //     password: this.loginForm.password,
-      //   })
-      //   .then(
-      //     (resp) => {
-      //       _this.loading = false;
-      //       if (resp.status == 200) {
-      //         //成功
-      //         var json = resp.data;
-      //         if (json.status == "success") {
-      //           _this.$router.replace({ path: "/home" });
-      //         } else {
-      //           _this.$alert("登录失败!", "失败!");
-      //         }
-      //       } else {
-      //         //失败
-      //         _this.$alert("登录失败!", "失败!");
-      //       }
-      //     },
-      //     (resp) => {
-      //       this.loading = false;
-      //       _this.$alert("找不到服务器⊙﹏⊙∥!", "失败!");
-      //     }
-      //   );
+      this.loading = true;
+      debugger;
+      this.$https
+        .postRequest("/login", {
+          username: this.loginForm.username,
+          password: this.loginForm.password,
+        })
+        .then(
+          (resp) => {
+            debugger;
+            this.loading = false;
+            if (resp.status == 200) {
+              //成功
+              var json = resp.data;
+              if (json.status == 200) {
+                this.$router.replace({ path: "/HomePageContent" });
+              } else {
+                this.$alert("登录失败!", "失败!");
+              }
+            } else {
+              //失败
+              this.$alert("登录失败!", "失败!");
+            }
+          },
+          (resp) => {
+            this.loading = false;
+            this.$alert("找不到服务器⊙﹏⊙∥!", "失败!");
+          }
+        );
     },
   },
 };

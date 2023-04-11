@@ -1,34 +1,39 @@
 <template lang="pug">
-article-block(:config = "config")
+.article-block(v-if="!isLoad" v-for="article in articleList" :key="article.id")
+  div {{ article.uid }} 发表了一片文章
+article-skeleton-block(v-else)
 </template>
 
 <script>
 export default {
-  name: "home-page-content",
+  name: "article-block",
   props: {
     msg: String,
+    queryUrl: {
+      type: String,
+      default: "/article/get-list/by-page",
+    },
   },
   data() {
     return {
-      isLoading: true,
+      isLoad: false,
       articleList: [],
     };
   },
   methods: {
     async init() {
       debugger;
-      this.isLoading = true;
-      const { data } = await this.$https.getRequest(
-        "/article/get-list/by-page"
-      );
+      this.isLoad = false;
+      this.articleList = [];
+      const { data } = await this.$https.getRequest(this.queryUrl);
       if (data?.length) {
         this.articleList = data;
-        this.isLoading = false;
+        this.isLoad = true;
       }
     },
   },
   created() {
-    // this.init();
+    this.init();
   },
 };
 </script>
