@@ -1,0 +1,20 @@
+$basic-margin-1x: 8px;
+$basic-margin-2x: 16px;
+$basic-margin-2x: 24px;
+
+$basic-fontsize-12: 12px;
+$basic-fontsize-14: 14px;
+$basic-fontsize-16: 16px;
+$basic-fontsize-18: 18px;
+$basic-fontsize-20: 20px;
+$basic-fontsize-24: 24px;
+
+.iconfont-operation {
+  font-size: $basic-fontsize-18;
+  padding-right: $basic-margin-1x;
+}
+
+.font-14-b {
+  font-size: $basic-fontsize-14;
+  color: black;
+}

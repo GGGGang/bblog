@@ -12,57 +12,50 @@
       el-form-item(style="width: 100%")
         el-button(type="primary" @click="submitClick" style="width: 100%") 登录
 </template>
-<script>
-export default {
-  data() {
-    return {
-      rules: {
-        account: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-        checkPass: [{ required: true, message: "请输入密码", trigger: "blur" }],
-      },
-      checked: true,
-      loginForm: {
-        username: "sang",
-        password: "123",
-      },
-      loading: false,
-    };
-  },
-  methods: {
-    submitClick: function () {
-      // var _this = this;
-      this.loading = true;
-      debugger;
-      this.$https
-        .postRequest("/login", {
-          username: this.loginForm.username,
-          password: this.loginForm.password,
-        })
-        .then(
-          (resp) => {
-            debugger;
-            this.loading = false;
-            if (resp.status == 200) {
-              //成功
-              var json = resp.data;
-              if (json.status == 200) {
-                this.$router.replace({ path: "/HomePageContent" });
-              } else {
-                this.$alert("登录失败!", "失败!");
-              }
-            } else {
-              //失败
-              this.$alert("登录失败!", "失败!");
-            }
-          },
-          (resp) => {
-            this.loading = false;
-            this.$alert("找不到服务器⊙﹏⊙∥!", "失败!");
+
+<script setup>
+import { getCurrentInstance, ref, reactive } from "vue";
+import { useRouter, useRoute } from "vue-router";
+const { proxy } = getCurrentInstance();
+const rules = reactive({
+  account: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+  checkPass: [{ required: true, message: "请输入密码", trigger: "blur" }],
+});
+let checked = ref(true);
+let loading = ref(false);
+let loginForm = reactive({
+  username: "sang",
+  password: "123",
+});
+const router = useRouter();
+const route = useRoute();
+function submitClick() {
+  loading = true;
+  proxy.$https
+    .postRequest("/login", {
+      username: loginForm.username,
+      password: loginForm.password,
+    })
+    .then(
+      (resp) => {
+        loading = false;
+        if (resp.status == 200) {
+          var json = resp.data;
+          if (json.status == 200) {
+            router.replace({ path: "/HomePageContent" });
+          } else {
+            proxy.$alert("登录失败!", "失败!");
           }
-        );
-    },
-  },
-};
+        } else {
+          this.$alert("登录失败!", "失败!");
+        }
+      },
+      (resp) => {
+        loading = false;
+        proxy.$alert("找不到服务器⊙﹏⊙∥!", "失败!");
+      }
+    );
+}
 </script>
 <style scoped lang="scss">
 .login {
