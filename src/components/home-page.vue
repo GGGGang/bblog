@@ -15,7 +15,9 @@
           home-page-tab
           router-view
         .home-page__main-tool
-          .home-page__tool-guide
+          nav-right-tool(v-bind = "toolConfig1")
+          nav-right-user-center(v-bind = "toolConfig1")
+          nav-right-tool(v-bind = "toolConfig2")
   </template>
 <script>
 export default {
@@ -40,6 +42,15 @@ export default {
           index: "3",
         },
       ],
+      toolConfig1: {
+        toolTitle: "BBlog漫游指南",
+        toolText: "帮助开发者记录与成长的社区",
+      },
+      toolConfig2: {
+        selfIconText: "告",
+        toolTitle: "版本更新",
+        toolText: "本次更新内容包含 1. 新增摘录功能 2. 文章支持MD编辑器...",
+      },
     };
   },
   methods: {
@@ -97,13 +108,6 @@ export default {
     width: 775px;
     height: 64px;
     background-color: red;
-  }
-  &__tool {
-    &-guide {
-      width: 412px;
-      height: 128px;
-      background-color: pink;
-    }
   }
 }
 .el-menu-item {

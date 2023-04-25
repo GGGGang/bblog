@@ -42,17 +42,16 @@ function fmtDate(date) {
   return proxy.$moment(date).format("YYYY-MM-DD");
 }
 function limitTextCount(val) {
-  debugger;
   let res = val;
-  if (val?.length > 200) {
-    res = val.substring(0, 200) + "...";
+  if (val?.length > 190) {
+    res = val.substring(0, 190) + "...";
   }
   return res;
 }
 </script>
 
 <style scoped lang="scss">
-.home-page-content {
+.article-block {
   background-color: white;
   border: 1px solid #f6f6f6;
 
@@ -74,10 +73,6 @@ function limitTextCount(val) {
   display: block;
   object-fit: cover;
 }
-::v-deep .el-card__body {
-  padding: 8px 24px;
-}
-
 .article-block {
   &__publish-info {
     color: #808080;
