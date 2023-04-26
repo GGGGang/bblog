@@ -1,7 +1,8 @@
 <template lang="pug">
 .nav-right-user-center(v-if = "toolTitle" @click="jump")
-  .nav-right-user-center__button(v-for = "button in buttons" :key="button.buttonTitle")
-    .nav-right-user-center__icon {{ button.buttonIcon }}
+  .nav-right-user-center__button(v-for = "button in buttons" :key="button.buttonTitle" :style="button?.style")
+    .nav-right-user-center__icon
+      i(:class="'iconfont iconfont-center-tool icon-'+button.icon" style ="color:#fff")
     .nav-right-user-center__text 
       .nav-right-user-center__text-title {{ button.buttonTitle }}
       .nav-right-user-center__text-content {{ button.buttonDesc }}
@@ -17,24 +18,36 @@ const props = defineProps({
 
 const buttons = reactive([
   {
-    buttonIcon: "收",
+    icon: "shoucang2",
     buttonTitle: "收藏",
     buttonDesc: "收藏的文章都在这里",
+    style: {
+      margin: "24px 12px 12px 24px",
+    },
   },
   {
-    buttonIcon: "收",
-    buttonTitle: "收藏1",
-    buttonDesc: "收藏的文章都在这里",
+    icon: "guangbiaoyidong",
+    buttonTitle: "摘录",
+    buttonDesc: "文章片段",
+    style: {
+      margin: "24px 24px 12px 12px",
+    },
   },
   {
-    buttonIcon: "收",
-    buttonTitle: "收藏2",
-    buttonDesc: "收藏的文章都在这里",
+    icon: "bijijilu",
+    buttonTitle: "笔记",
+    buttonDesc: "有趣的灵魂",
+    style: {
+      margin: "12px 12px 24px 24px",
+    },
   },
   {
-    buttonIcon: "收",
-    buttonTitle: "收藏3",
-    buttonDesc: "收藏的文章都在这里",
+    icon: "biaoqian",
+    buttonTitle: "标签",
+    buttonDesc: "总有你感兴趣",
+    style: {
+      margin: "12px 24px 24px 12px",
+    },
   },
 ]);
 function jump() {
@@ -57,7 +70,8 @@ const iconText = computed(() => {
 
   &__button {
     display: flex;
-    margin: 6px;
+    width: 170px;
+    height: 50px;
   }
 
   &__icon {
@@ -82,7 +96,6 @@ const iconText = computed(() => {
     &-content {
       font-size: 12px;
       color: #7ca1cf;
-      margin: 4px 24px 0px 0px;
     }
   }
 }

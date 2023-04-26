@@ -7,7 +7,7 @@
         el-menu(:default-active="activeIndex" active-text-color= "#056DE8" :router="true" :ellipsis="false" mode="horizontal" @select="handleSelect")
           el-menu-item(v-for="tab in tabs" :key="tab.index" :index="tab.index") {{ tab.label }}
         .home-page__avatar
-          el-avatar.home-page__avatar-img(:size= "50" :src="require('@/assets/logo.png')")
+          el-avatar.home-page__avatar-img(:size= "50" :src="require('@/assets/touxiang.png')")
           .home-page__avatar-name admin
     el-main
       .home-page__main
@@ -18,6 +18,7 @@
           nav-right-tool(v-bind = "toolConfig1")
           nav-right-user-center(v-bind = "toolConfig1")
           nav-right-tool(v-bind = "toolConfig2")
+          nav-right-adv(v-bind = "toolConfig2")
   </template>
 <script>
 export default {
