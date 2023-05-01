@@ -1,0 +1,8 @@
+.aside-box-shadow-animation {
+  transition: box-shadow 0.6s;
+  -webkit-transition: box-shadow 0.6s;
+}
+
+.aside-box-shadow-animation:hover {
+  box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.3);
+}

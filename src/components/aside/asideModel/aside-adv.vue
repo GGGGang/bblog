@@ -1,9 +1,9 @@
 <template lang="pug">
-.nav-right-adv(v-if = "toolTitle" @click="jump")
-  el-image.nav-right-adv__img(:fit="full"  :src = "require('@/assets/login-bg.png')")
-  .nav-right-adv__content
-    .nav-right-adv__content-title 广告位招租中～
-    .nav-right-adv__content-desc 为了借助社交产品的流量，让用户主动分享...
+.aside-adv.aside-box-shadow-animation(v-if = "toolTitle" @click="jump")
+  el-image.aside-adv__img(:fit="full"  :src = "require('@/assets/login-bg.png')")
+  .aside-adv__content
+    .aside-adv__content-title 广告位招租中～
+    .aside-adv__content-desc 为了借助社交产品的流量，让用户主动分享...
 </template>
 
 <script setup>
@@ -22,7 +22,7 @@ const iconText = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-.nav-right-adv {
+.aside-adv {
   width: 412px;
   background-color: #fff;
   overflow: hidden;

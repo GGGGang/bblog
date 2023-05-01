@@ -10,6 +10,7 @@ import * as ElIconModules from "@element-plus/icons-vue";
 import "element-plus/dist/index.css";
 import "@/assets/icon/iconfont.css";
 import "@/assets/style/global-style.scss";
+import "@/assets/style/global-animation.scss";
 
 moment.locale("zh-cn");
 const app = createApp(App);

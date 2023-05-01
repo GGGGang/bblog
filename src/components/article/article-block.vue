@@ -1,22 +1,22 @@
 <template lang="pug">
 .article-block( v-for="article in list.articleList" :key="article.id")
-    el-card(shadow="never")
-      .article-block__publish-info 曹万华·{{ fmtDate(article.publishDate) }} 发表了一片文章 
-      .article-block__title {{ article.title}}
-      .article-block__content 
-        img(src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image")
-        .article-block__content-text {{ limitTextCount(article.summary) }} 
-          el-button(text type='primary') 阅读全文 
-            i(class="iconfont icon-youjiantou")
-      .article-block__operation 
-        el-button-group
-          el-button(text)
-            i(class="iconfont icon-shoucang iconfont-operation" style ="color:#e18a3b") 收藏
-          el-button(text)
-            i(class="iconfont icon-dianzan iconfont-operation" style ="color:#c8161d") 点赞
-          el-button(text)
-            i(class="iconfont icon-fenxiang iconfont-operation" style = "color:#056DE8") 分享
-     
+  .article-block-item
+    .article-block__publish-info {{ article.nickname}}·{{ fmtDate(article.publishDate) }} 发表了一片文章 
+    .article-block__title {{ article.title}}
+    .article-block__content 
+      img(src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image")
+      .article-block__content-text {{ limitTextCount(article.summary) }} 
+        el-button(text type='primary') 阅读全文 
+          i(class="iconfont icon-youjiantou")
+    .article-block__operation 
+      el-button-group
+        el-button(text)
+          i(class="iconfont icon-shoucang iconfont-operation" style ="color:#e18a3b") 收藏
+        el-button(text)
+          i(class="iconfont icon-dianzan iconfont-operation" style ="color:#c8161d") 点赞
+        el-button(text)
+          i(class="iconfont icon-fenxiang iconfont-operation" style = "color:#056DE8") 分享
+      
 //- article-skeleton-block(v-else)
 </template>
 
@@ -30,7 +30,9 @@ const { proxy } = getCurrentInstance();
 async function init() {
   isLoad = false;
   list.articleList = [];
-  const { data } = await proxy.$https.getRequest("/article/get-list/by-page");
+  const { data } = await proxy.$https.getRequest("/article/get-list/by-page", {
+    pageSize: 5,
+  });
   if (data?.length) {
     list.articleList = data;
     isLoad = true;
@@ -51,21 +53,6 @@ function limitTextCount(val) {
 </script>
 
 <style scoped lang="scss">
-.article-block {
-  background-color: white;
-  border: 1px solid #f6f6f6;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 775px;
-  height: 300px;
-}
-.el-skeleton {
-  margin: 24px;
-}
-
 .image {
   width: 480px;
   height: 160px;
@@ -74,6 +61,17 @@ function limitTextCount(val) {
   object-fit: cover;
 }
 .article-block {
+  background-color: white;
+  border: 1px solid #f6f6f6;
+
+  width: 775px;
+  height: 300px;
+
+  &-item {
+    display: flex;
+    flex-direction: column;
+    margin: 24px;
+  }
   &__publish-info {
     color: #808080;
   }
