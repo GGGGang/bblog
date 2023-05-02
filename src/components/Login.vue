@@ -42,7 +42,7 @@ function submitClick() {
         if (resp.status == 200) {
           var json = resp.data;
           if (json.status == 200) {
-            router.replace({ path: "/HomePageContent" });
+            router.replace({ path: "/article/recommend" });
           } else {
             proxy.$alert("登录失败!", "失败!");
           }

@@ -21,28 +21,39 @@
 </template>
 
 <script setup>
-import { ref, reactive, getCurrentInstance, computed } from "vue";
+import { ref, reactive, getCurrentInstance, watch } from "vue";
 let isLoad = ref(false);
 let list = reactive({
   articleList: [],
 });
 const { proxy } = getCurrentInstance();
+
+const props = defineProps({
+  params: Object,
+});
+
+let initParams = Object.assign({ pageSize: 5 }, props?.params);
+
+//初始化数据
 async function init() {
   isLoad = false;
   list.articleList = [];
-  const { data } = await proxy.$https.getRequest("/article/get-list/by-page", {
-    pageSize: 5,
-  });
+  const { data } = await proxy.$https.getRequest(
+    "/article/get-list/by-page",
+    initParams
+  );
   if (data?.length) {
     list.articleList = data;
     isLoad = true;
   }
 }
 
-init();
+// 格式时间
 function fmtDate(date) {
   return proxy.$moment(date).format("YYYY-MM-DD");
 }
+
+// 文字缩略信息
 function limitTextCount(val) {
   let res = val;
   if (val?.length > 190) {
@@ -50,6 +61,21 @@ function limitTextCount(val) {
   }
   return res;
 }
+
+init();
+
+// 监听当前页面路由状态改变列表数据
+watch(
+  () => proxy.$route.params.type,
+  (toParams, previousParams) => {
+    delete initParams.isNew;
+    if (toParams === "new") {
+      initParams.isNew = true;
+    }
+    init();
+  },
+  { deep: true }
+);
 </script>
 
 <style scoped lang="scss">

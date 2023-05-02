@@ -12,27 +12,27 @@ export default {
   },
   data() {
     return {
-      activeIndex: "/HomePageContent",
+      activeIndex: "/article/recommend",
       tabs: [
         {
           label: "推荐",
-          name: "homePage",
-          index: "/HomePageContent",
+          name: "recommend",
+          index: "/article/recommend",
         },
         {
           label: "最新",
-          name: "follow",
-          index: "/about",
+          name: "new",
+          index: "/article/new",
         },
         {
           label: "热门",
           name: "recommend",
-          index: "3",
+          index: "/article/hot",
         },
         {
           label: "回答",
-          name: "recommend2",
-          index: "3",
+          name: "answer",
+          index: "/answer",
         },
       ],
     };
