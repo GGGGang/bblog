@@ -1,19 +1,16 @@
 <template lang="pug">
 .hot-list
-  .hot-list-table
+  .hot-list-table(v-for="item in hotList")
     .hot-list-table__title 
       i(class="iconfont icon-yuanquan iconfont-hot") 
-      .hot-list-table__title-text 热门文章
+      .hot-list-table__title-text {{ item }}
     .hot-list-table__content
-      el-table.hot-list-table__content-text(:data="tableData" :show-header="false")
-        el-table-column(prop="no" width="80")
-          template(#default="scope")
-            hot-list-no(:row = "scope.row")
-        el-table-column(prop="content" width="200")
+      hot-list-no(v-for="row in tableData" :row = "row")
 </template>
 
 <script setup>
 import { ref, reactive } from "vue";
+const hotList = reactive(["热门文章", "热门评论"]);
 const tableData = reactive([
   {
     no: "1",
@@ -42,21 +39,17 @@ const tableData = reactive([
 .hot-list {
   background-color: white;
   border: 1px solid #f6f6f6;
-
+  display: flex;
   width: 775px;
-  height: 300px;
   &-table {
     &__title {
       display: flex;
       justify-items: center;
       width: 200px;
+      margin: 10px 0px 5px 20px;
       &-text {
         line-height: 38.33px;
       }
-    }
-    &__content-text {
-      font-size: 14px;
-      color: #000;
     }
   }
 }

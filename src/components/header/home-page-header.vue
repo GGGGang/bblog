@@ -1,33 +1,57 @@
 <template lang="pug">
 .home-page-header
   .home-page-header__app-name BBlog
-  el-menu(:default-active="activeIndex" active-text-color= "#056DE8" :router="true" :ellipsis="false" mode="horizontal" @select="handleSelect")
+  el-menu(:default-active="tabIndex" active-text-color= "#056DE8" :router="true" :ellipsis="false" mode="horizontal" )
     el-menu-item(v-for="tab in tabs" :key="tab.index" :index="tab.index") {{ tab.label }}
   .home-page-header__avatar
-    el-avatar.home-page__avatar-img(:size= "50" :src="require('@/assets/touxiang.png')")
+    el-avatar.home-page-header__avatar-img(:size= "50" :src="require('@/assets/touxiang.png')")
     .home-page-header__avatar-name admin
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
-const activeIndex = ref("/HomePageContent");
+import { ref, reactive, getCurrentInstance, watch } from "vue";
+const { proxy } = getCurrentInstance();
+import { useTabIndex } from "@/store/tab";
+const store = useTabIndex();
+let tabIndex = ref("/article/recommend");
 const tabs = reactive([
   {
     label: "首页",
-    name: "homePage",
-    index: "/HomePageContent",
+    name: "recommend",
+    index: "/article/recommend",
   },
   {
     label: "关注",
-    name: "follow",
-    index: "/about",
+    name: "new",
+    index: "/follow",
   },
   {
     label: "评论",
-    name: "recommend",
-    index: "3",
+    name: "answer",
+    index: "/answer",
   },
 ]);
+
+// 初始化tabIndex
+function initIndex() {
+  const type = proxy.$route.fullPath;
+  tabs.forEach((item) => {
+    if (item.index.indexOf(type) !== -1) {
+      tabIndex = item.index;
+      store.changeTabIndex(item.index);
+    }
+  });
+}
+// 切换tab
+watch(
+  () => proxy.$route.fullPath,
+  (toParams) => {
+    store.changeTabIndex(toParams);
+  },
+  { deep: true }
+);
+
+initIndex();
 </script>
 <style lang="scss" scoped>
 .home-page-header {
@@ -42,6 +66,7 @@ const tabs = reactive([
     display: inline-block;
     width: auto;
     height: auto;
+    cursor: pointer;
   }
 
   &__avatar {
@@ -50,6 +75,9 @@ const tabs = reactive([
     align-items: center;
     &-img {
       margin-right: 12px;
+    }
+    &-name {
+      font-weight: 700;
     }
   }
   .el-menu--horizontal {

@@ -6,3 +6,12 @@
 .aside-box-shadow-animation:hover {
   box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.3);
 }
+
+.bg-animation {
+  transition: background-color 0.2s;
+  -webkit-transition: background-color 0.2s;
+}
+
+.bg-animation:hover {
+  background-color: #f6f6f6;
+}

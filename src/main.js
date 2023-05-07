@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
+import pinia from "./store";
 import api from "./utils/api";
 import moment from "moment";
 
@@ -23,7 +23,7 @@ Object.keys(ElIconModules).forEach((key) => {
   app.component(key, ElIconModules[key]);
 });
 
-app.use(store);
+app.use(pinia);
 app.use(router);
 app.use(ElementPlus);
 

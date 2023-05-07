@@ -6,15 +6,37 @@
     el-main
       .home-page__main
         .home-page__main-content
-          home-page-tab
+          home-page-tab(v-if="showChildTab")
           router-view
         .home-page__main-tool
           home-page-aside-right-tool 
   </template>
-<script>
-export default {
-  name: "home-page",
-};
+<script setup>
+import { ref, reactive, getCurrentInstance, watch } from "vue";
+import { useTabIndex } from "@/store/tab";
+const store = useTabIndex();
+const { proxy } = getCurrentInstance();
+
+let showChildTab = ref(true);
+
+//初始化热门列表
+function init(currentIndex) {
+  showChildTab.value = true;
+  if (
+    currentIndex.indexOf("follow") !== -1 ||
+    currentIndex.indexOf("answer") !== -1
+  ) {
+    showChildTab.value = false;
+  }
+}
+watch(
+  () => store.currentTabIndex,
+  (toParams, previousParams) => {
+    init(toParams);
+  },
+  { deep: true }
+);
+init(store.currentTabIndex);
 </script>
 
 <style lang="scss" scoped>

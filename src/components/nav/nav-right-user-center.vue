@@ -1,6 +1,6 @@
 <template lang="pug">
 .nav-right-user-center(v-if = "toolTitle" @click="jump")
-  .nav-right-user-center__button(v-for = "button in buttons" :key="button.buttonTitle" :style="button?.style")
+  .nav-right-user-center__button.bg-animation(v-for = "button in buttons" :key="button.buttonTitle" :style="button?.style")
     .nav-right-user-center__icon
       i(:class="'iconfont iconfont-center-tool icon-'+button.icon" style ="color:#fff")
     .nav-right-user-center__text 
@@ -50,9 +50,7 @@ const buttons = reactive([
     },
   },
 ]);
-function jump() {
-  debugger;
-}
+function jump() {}
 const iconText = computed(() => {
   return props.toolTitle.substring(0, 1);
 });

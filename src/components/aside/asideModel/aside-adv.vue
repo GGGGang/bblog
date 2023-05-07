@@ -13,9 +13,7 @@ const props = defineProps({
   toolText: String,
   selfIconText: String,
 });
-function jump() {
-  debugger;
-}
+function jump() {}
 const iconText = computed(() => {
   return props.toolTitle.substring(0, 1);
 });

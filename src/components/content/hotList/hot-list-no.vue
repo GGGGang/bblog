@@ -1,6 +1,7 @@
 <template lang="pug">
 .hot-list-no 
   .hot-list-no__item(:style="getBackgroundColor(row.no)") {{ row.no }}
+  .hot-list-no__content {{ row.content }}
 </template>
 
 <script setup>
@@ -31,6 +32,9 @@ function getBackgroundColor(no) {
   height: 300px;
 }
 .hot-list-no {
+  display: flex;
+  margin-bottom: 12px;
+  margin-left: 24px;
   &__item {
     width: 26px;
     height: 26px;
@@ -40,6 +44,12 @@ function getBackgroundColor(no) {
     line-height: 26px;
     display: flex;
     justify-content: center;
+  }
+  &__content {
+    margin-left: 12px;
+    font-size: 14px;
+    line-height: 26px;
+    color: #000;
   }
 }
 </style>
